@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -9,17 +10,39 @@ public class Player : MonoBehaviour
 
     public Camera camera;
     public SpriteRenderer spriteRenderer;
+    public SpriteRenderer fireRenderer;
+    public SpriteRenderer damageOverlayRenderer;
+    public Sprite[] damageOverlays;
+
+    public int maxHealth = 5;
 
     Rigidbody2D rb;
     float acceleration;
     float steering;
     Rect visibleGameArea;
+    int currentHealth;
+    int currentDamageOverlayIndex = -1;
 
     // Start is called before the first frame update
     void Start()
     {
+        currentHealth = maxHealth;
+        FindObjectOfType<HealthManager>().SetHealth(currentHealth);
         rb = GetComponent<Rigidbody2D>();
         DetermineVisibleGameArea();
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        FindObjectOfType<HealthManager>().SetHealth(currentHealth);
+        currentDamageOverlayIndex++;
+        currentDamageOverlayIndex = Mathf.Min(currentDamageOverlayIndex, 2);
+        damageOverlayRenderer.sprite = damageOverlays[currentDamageOverlayIndex];
+        if (currentHealth < 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     void DetermineVisibleGameArea()
@@ -38,6 +61,9 @@ public class Player : MonoBehaviour
         // Tastur W S +1 -1
         // Controller Thumbstick links 1 - - 1
         acceleration = Mathf.Max(Input.GetAxis("Vertical"), 0);
+
+        fireRenderer.enabled = acceleration > 0;
+
         // A - D 1 - -1
         steering = Input.GetAxis("Horizontal");
     }
