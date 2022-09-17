@@ -5,6 +5,7 @@ using UnityEngine;
 public class Meteor : MonoBehaviour
 {
     public int damage = 1;
+    public int health = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,16 @@ public class Meteor : MonoBehaviour
         if (player)
         {
             player.TakeDamage(damage);
+            Destroy(gameObject);
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health == 0)
+        {
+            FindObjectOfType<ScoreManager>().AddPoints(1);
             Destroy(gameObject);
         }
     }

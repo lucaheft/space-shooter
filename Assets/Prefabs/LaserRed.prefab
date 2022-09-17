@@ -17,7 +17,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 597929826196830485, guid: 3e0932d431f71cd4fbca4b657e8af3e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.996
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 597929826196830485, guid: 3e0932d431f71cd4fbca4b657e8af3e7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -51,6 +51,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4164410882708575056, guid: 3e0932d431f71cd4fbca4b657e8af3e7, type: 3}
+      propertyPath: damage
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5127766276217618339, guid: 3e0932d431f71cd4fbca4b657e8af3e7, type: 3}
       propertyPath: m_Size.x
       value: 0.15
@@ -61,7 +65,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 383d9a83777b0be40941c5418c682bf5, type: 3}
     - target: {fileID: 8931487155165020480, guid: 3e0932d431f71cd4fbca4b657e8af3e7, type: 3}
       propertyPath: m_Name
-      value: Bullet
+      value: LaserRed
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e0932d431f71cd4fbca4b657e8af3e7, type: 3}

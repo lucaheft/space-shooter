@@ -16,12 +16,15 @@ public class Player : MonoBehaviour
 
     public int maxHealth = 5;
 
+    public WeaponSystem[] weaponSystems;
+
     Rigidbody2D rb;
     float acceleration;
     float steering;
     Rect visibleGameArea;
     int currentHealth;
     int currentDamageOverlayIndex = -1;
+    int currentWeaponSystemIndex = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -66,6 +69,44 @@ public class Player : MonoBehaviour
 
         // A - D 1 - -1
         steering = Input.GetAxis("Horizontal");
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            weaponSystems[currentWeaponSystemIndex].Fire();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            currentWeaponSystemIndex--;
+            if (currentWeaponSystemIndex < 0)
+            {
+                currentWeaponSystemIndex = weaponSystems.Length - 1;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            currentWeaponSystemIndex++;
+            if (currentWeaponSystemIndex >= weaponSystems.Length)
+            {
+                currentWeaponSystemIndex = 0;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Time.timeScale = 0f;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Time.timeScale = 1f;
+        }
     }
 
     void FixedUpdate()
